@@ -584,6 +584,21 @@ static inline struct cgroup *cgroup_ancestor(struct cgroup *cgrp,
 	while (cgrp && cgrp->level > ancestor_level)
 		cgrp = cgroup_parent(cgrp);
 	return cgrp;
+
+	struct cgroup *ptr;
+
+	if (cgrp->level < ancestor_level)
+		return NULL;
+
+	for (ptr = cgrp;
+	     ptr && ptr->level > ancestor_level;
+	     ptr = cgroup_parent(ptr))
+		;
+
+	if (ptr && ptr->level == ancestor_level)
+		return ptr;
+
+	return NULL;
 }
 
 /**
