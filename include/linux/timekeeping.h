@@ -36,6 +36,7 @@ void getboottime64(struct timespec64 *ts);
  */
 extern time64_t ktime_get_seconds(void);
 extern time64_t ktime_get_real_seconds(void);
+extern int __getnstimeofday64(struct timespec64 *tv);
 
 /*
  * ktime_t based interfaces
